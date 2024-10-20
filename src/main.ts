@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerCustomOptions, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import * as dotenv from 'dotenv'
+import { TransformationInterceptor } from './shared/exception/responseinterceptor';
 
 dotenv.config({path:'.env'});
 async function bootstrap() {
@@ -11,7 +12,7 @@ async function bootstrap() {
       cors:true
     }
   );
-
+app.useGlobalInterceptors(new TransformationInterceptor())
 
 const port:number=Number(process.env.PORT) || 3000;
 

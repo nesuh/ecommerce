@@ -1,41 +1,41 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsUUID } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
-
+import { userTypes } from "src/shared/enums/user.enum";
 export class CreateUserDto{
 @ApiProperty()
+@IsNotEmpty()
 @IsString()
-@IsUUID()
-id:string;
+name:string;
 
 
 @ApiProperty()
+@IsNotEmpty()
 @IsString()
-firstName:string;
+email:string;
 
 @ApiProperty()
-@IsString()
-middleName:string;
-@ApiProperty()
-@IsString()
-lastName:string;
-
-@ApiProperty()
-@IsString()
-phone:string
-
-@ApiProperty()
+@IsNotEmpty()
 @IsString()
 password:string;
 
 @ApiProperty()
+@IsNotEmpty()
 @IsString()
-email:string;
+@IsIn([userTypes.ADMIN,userTypes.CUSTOMER])
+type:string;
+
+@ApiProperty()
+@IsString()
+@IsOptional()
+secretToken:string
+
 }
 
 export class UpdateUserDto extends CreateUserDto {
-    @ApiProperty()
-    @IsUUID()
-    id: string;
+    name: string;
+    oldPassword?:string;
+    newPassword?:string;
   }
+
   

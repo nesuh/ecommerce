@@ -1,4 +1,5 @@
-    import { Audit } from './audit.entity';
+    import { userTypes } from 'src/shared/enums/user.enum';
+import { Audit } from './audit.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
     Entity()
     export class User extends Audit{
@@ -7,20 +8,23 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
     id:string; 
 
     @Column()
-    firstName:string;
+    name:string;
 
     @Column()
-    middleName:string;
-
-    @Column()
-    lastName:string;
-
-    @Column()
-    phone:string
+    email:string;
 
     @Column()
     password:string;
 
-    @Column()
-    email:string;
+    @Column({enum:[userTypes.ADMIN,userTypes.CUSTOMER]})
+    type:string
+
+    @Column({default:false})
+    isVerified:boolean;
+
+    @Column({default:null})
+    otp:string;  
+    
+    @Column({default:null})
+    otpExpiryTime:Date;
     }

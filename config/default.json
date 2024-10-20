@@ -1,0 +1,13 @@
+"emailService": {
+    "testDomain":"sandboxe4de527199c94ccfb6d6c08a8081a74c.mailgun.org",
+    "privateApiKey":"7d1e83a6248b73895f2e0262ad1c3a60-835621cf-e8afd81f",
+    "publicApiKey":"pubkey-88ba02ebc871125a5438ad1865535538",
+    
+    "emailTemplates":{
+        "forgotPassword":"forgot-password-template",
+        "verifyEmail":"verify-email-template",
+        "orderSuccess":"order-success"
+    }
+    
+
+}
