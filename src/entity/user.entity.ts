@@ -22,8 +22,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
     @Column({default:false})
     isVerified:boolean;
 
-    @Column({default:null})
-    otp:string;  
+    @Column()
+    otp:number;  
     
     @Column({default:null})
     otpExpiryTime:Date;

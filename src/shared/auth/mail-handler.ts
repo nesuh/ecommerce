@@ -1,46 +1,31 @@
-import { config } from "dotenv";
+// import { Injectable } from '@nestjs/common';
+// import * as mailgun from 'mailgun-js';
 
+// @Injectable()
+// export class EmailService {
+//   private mg;
 
-export const sendEmail = async(
-    to:string,
-    templateName:string,
-    subject:string,
-    date:Record<string.any> = { },
-) =>{
-    try{
+//   constructor() {
+//     this.mg = mailgun({
+//       apiKey: process.env.MAILGUN_API_KEY,  // Private API Key
+//       domain: process.env.MAILGUN_DOMAIN,   // Your Mailgun domain
+//     });
+//   }
 
-   
-    const form= new FormData();
-    form.append('to',to);
-    form.append('template',templateName);
-    form.append('subject',subject);
-    form.append(
-        'from',
-        'mailgun@sendbox ---uuid.mailgun.org',
-        );
-    Object.keys(templateVars).forEach(
-        (key)=>{
-            form.append(`v:${key}`,templateVars[key])
-} )
+//   async sendEmail(to: string, subject: string, template: string, variables: any) {
+//     const data = {
+//       from: 'Your App <noreply@yourdomain.com>',
+//       to,
+//       subject,
+//       template,
+//       'h:X-Mailgun-Variables': JSON.stringify(variables),  // Include variables for the email template
+//     };
 
-const username = 'api';
-const password =config.get('emailService.privateKey');
-const token =Buffer.from(`${username}:${password}`).toString('base64')
-
-const response =await axios({
-    method:'post',
-    url:`https://api.mailgun.net/v3/${config.get('emailService.testDomain')}/messages`,
-    headers:{
-        Authorization:`Basic ${token}`,
-        contentType:'multipart/form-data'
-    },
-    data:form
-})
-return response
-
-}catch(error){
-        
-}
-// function axios(arg0: { method: string; url: string; headers: { Authorization: string; contentType: string; }; data: FormData; }) {
-//     throw new Error("Function not implemented.");
+//     try {
+//       const result = await this.mg.messages().send(data);
+//       return result;
+//     } catch (error) {
+//       throw new Error('Error sending email');
+//     }
+//   }
 // }

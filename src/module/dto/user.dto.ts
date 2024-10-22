@@ -3,6 +3,9 @@ import { IsIn, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator'
 
 import { userTypes } from "src/shared/enums/user.enum";
 export class CreateUserDto{
+    static email(email: any) {
+        throw new Error("Method not implemented.");
+    }
 @ApiProperty()
 @IsNotEmpty()
 @IsString()
@@ -29,6 +32,9 @@ type:string;
 @IsString()
 @IsOptional()
 secretToken:string
+    static type: userTypes;
+    static password: any;
+    static secretToken: string;
 
 }
 

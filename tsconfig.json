@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "commonjs", // Node.js typically expects commonjs
+    "moduleResolution": "node", // Ensures proper module resolution
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true, // Ensures compatibility with CommonJS modules
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",

@@ -10,9 +10,7 @@ export const TypeOrmConfigHelper = {
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD ?? 'root',
 };
 
-const pathPrefix =
-  process.env.NODE_ENV === 'development' ? '' : '';
-
+const pathPrefix = process.env.NODE_ENV === 'development' ? 'src/' : 'dist/';
 export const dataSourceOptions = {
   type: 'postgres',
   host: TypeOrmConfigHelper.DATABASE_HOST,
@@ -20,13 +18,13 @@ export const dataSourceOptions = {
   database: TypeOrmConfigHelper.DATABASE_NAME,
   username: TypeOrmConfigHelper.DATABASE_USER,
   password: TypeOrmConfigHelper.DATABASE_PASSWORD,
-  entities: [`${pathPrefix}dist/**/*.entity.{ts,js}`],
-  subscribers: [`${pathPrefix}dist/**/subscribers/*.subscribers.{ts,js}`],
-  migrations: [`${pathPrefix}dist/migrations/*.{ts,js}`],
+  entities: ['src/**/*.entity.{ts,js}'],   
+  subscribers: [`${pathPrefix}**/subscribers/*.subscribers.{ts,js}`],
+  migrations: ['src/migrations/*.{ts,js}'], // Look in `src/migrations` during development
   migrationsRun: true,
   migrationsTableName: 'typeorm_migrations',
   logger: 'advanced-console',
-  logging: 'all',
+  logging: true,
   synchronize: false,
   autoLoadEntities: true,
 } as DataSourceOptions;
@@ -34,3 +32,5 @@ export const dataSourceOptions = {
 const dataSource = new DataSource(dataSourceOptions);
 
 export default dataSource;
+
+
