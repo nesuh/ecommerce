@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "ty
 
 export class Audit {
     @Column({default:0})
-    public tenantId:number;
+    public tenantId!:number;
 
     @CreateDateColumn({type:'timestamp'})
     public createdAt!:Date;
@@ -13,8 +13,3 @@ export class Audit {
     public deletedAt!: Date;
 
 }
-
-// export class OrgAudit extends Audit {
-//     @Column({type:'uuid'})
-//     public o
-// }

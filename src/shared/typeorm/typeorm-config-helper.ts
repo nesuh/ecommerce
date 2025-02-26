@@ -5,7 +5,7 @@ dotenv.config({ path: '.env' });
 export const TypeOrmConfigHelper = {
   DATABASE_HOST: process.env.DATABASE_HOST ?? 'localhost',
   DATABASE_PORT: process.env.DATABASE_PORT ?? '5432',
-  DATABASE_NAME: process.env.DATABASE_NAME ?? 'try',
+  DATABASE_NAME: process.env.DATABASE_NAME ?? 'trytry',
   DATABASE_USER: process.env.DATABASE_USER ?? 'postgres',
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD ?? 'root',
 };
