@@ -1,30 +1,28 @@
-    import { userTypes } from 'src/shared/enums/user.enum';
-import { Audit } from './audit.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-    Entity()
-    export class User extends Audit{
+/* eslint-disable prettier/prettier */
+import { AccountVerificationStatusEnum } from "src/shared/enums/account-verification-status.enum";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Account } from "./account.entity";
+import { Store } from "./store.entity";
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn()
-    id:string; 
+  @Column({
+    type: 'enum',
+    enum: AccountVerificationStatusEnum,
+    default: AccountVerificationStatusEnum.NEW,
+  })
+  public status: string;
 
-    @Column()
-    name:string;
+  @Column({ type: 'text' })
+  public accountId: string;
 
-    @Column()
-    email:string;
+  @ManyToOne(() => Account, (account) => account.users)
+  @JoinColumn({ name: 'accountId' })
+  public account: Account;
 
-    @Column()
-    password:string;
 
-    @Column({enum:[userTypes.ADMIN,userTypes.CUSTOMER]})
-    type:string
-
-    @Column({default:false})
-    isVerified:boolean;
-
-    @Column()
-    otp:number;  
-    
-    @Column({default:null})
-    otpExpiryTime:Date;
-    }
+  @OneToMany(() => Store, (store) => store.owner)
+  stores: Store[];
+}

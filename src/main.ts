@@ -1,9 +1,10 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerCustomOptions, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import * as dotenv from 'dotenv'
 import { TransformationInterceptor } from './shared/exception/responseinterceptor';
+import { AllExceptionFilter } from './shared/exception/httpExceptionFilter';
 
 dotenv.config({path:'.env'});
 async function bootstrap() {
@@ -13,6 +14,7 @@ async function bootstrap() {
     }
   );
 app.useGlobalInterceptors(new TransformationInterceptor())
+app.useGlobalFilters(new AllExceptionFilter(app.get(HttpAdapterHost)));
 
 const port:number=Number(process.env.PORT) || 3000;
 
